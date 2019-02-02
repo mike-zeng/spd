@@ -20,12 +20,10 @@ public class HeadInfo {
     private Integer width;
     //参考高度
     private Integer height;
-    //人脸参照照片垂直方向的角度(顺时针)
-    private Double rotation;
+    //人脸位置
+    private Location location;
     //人脸旋转角度参数
-    private Map<String,Double> angel;
-    //人脸表情
-    private String expression;
+    private Angle angel;
     //人脸可信度
     private Double probability;
 }

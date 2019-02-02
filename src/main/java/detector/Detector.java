@@ -1,9 +1,9 @@
 package detector;
 
-import java.util.HashMap;
+import model.SpdImage;
 
 public interface Detector {
-    public void init(HashMap<String,String> config);
+    public boolean init(String appId,String apiKey,String secretKey);
 
-    public Object detection(String base);
+    public Object detection(SpdImage spdImage) throws Exception;
 }
