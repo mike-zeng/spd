@@ -19,6 +19,15 @@ import java.util.HashMap;
 public class HeadDetector implements Detector {
     private AipFace client=null;
     private boolean state=false;
+    private static HeadDetector headDetector=new HeadDetector();
+    
+    private HeadDetector(){
+        
+    }
+    
+    public static HeadDetector getHeadDetecto(){
+        return headDetector;
+    }
 
     public boolean init(String appId, String apiKey, String secretKey) {
         client=new AipFace(appId,apiKey,secretKey);

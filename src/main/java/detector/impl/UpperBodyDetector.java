@@ -26,6 +26,15 @@ public class UpperBodyDetector implements Detector {
     private boolean state=false;
     Gson gson=new Gson();
     JSONObject bodyParts=null;
+    private static UpperBodyDetector upperBodyDetector=new UpperBodyDetector();
+    
+    private UpperBodyDetector(){
+        
+    }
+    
+    public static UpperBodyDetector getUpperBodyDetector(){
+        return upperBodyDetector;
+    }
     public boolean init(String appId, String apiKey, String secretKey) {
         client=new AipBodyAnalysis(appId,apiKey,secretKey);
         if (client==null){

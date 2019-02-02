@@ -5,9 +5,9 @@ package model;
  * 统一图片形式
  */
 public class SpdImage {
-    private final static String URL="url";
-    private final static String BASE64="base64";
-    private final static String BYTE_ARRAY="byteArray";
+    public final static String URL="url";
+    public final static String BASE64="base64";
+    public final static String BYTE_ARRAY="byteArray";
 
     private Integer width;
     private Integer height;

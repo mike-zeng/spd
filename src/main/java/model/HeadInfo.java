@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Map;
 
 /**
  * 描述头部信息
