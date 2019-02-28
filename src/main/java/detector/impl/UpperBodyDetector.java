@@ -2,6 +2,7 @@ package detector.impl;
 
 
 import com.baidu.aip.bodyanalysis.AipBodyAnalysis;
+import com.baidu.aip.util.Base64Util;
 import com.google.gson.Gson;
 import detector.Detector;
 import model.Point;
@@ -26,6 +27,7 @@ public class UpperBodyDetector implements Detector {
     private boolean state=false;
     Gson gson=new Gson();
     JSONObject bodyParts=null;
+    JSONObject location=null;
     private static UpperBodyDetector upperBodyDetector=new UpperBodyDetector();
     
     private UpperBodyDetector(){
@@ -52,7 +54,8 @@ public class UpperBodyDetector implements Detector {
         upperBodyInfo.setWidth(spdImage.getWidth());
         upperBodyInfo.setHeight(spdImage.getHeight());
 
-        JSONObject ret=client.bodyAnalysis(spdImage.getImageArr(),new HashMap<String, String>());
+        byte[] bytes=spdImage.getImageArr();
+        JSONObject ret=client.bodyAnalysis(bytes,new HashMap<String, String>());
         System.out.println(ret);
         if (ret==null||ret.get("person_info")==null){
             return null;
@@ -64,8 +67,13 @@ public class UpperBodyDetector implements Detector {
         JSONObject personInfo=jsonArray.getJSONObject(0);
 
         bodyParts= (JSONObject) personInfo.get("body_parts");
+        location=(JSONObject)personInfo.get("location");
 
+        double height=(Double)location.get("height");
+        double width=(Double) location.get("width");
 
+        upperBodyInfo.setBodyHeight(height);
+        upperBodyInfo.setBodyWidth(width);
         Point nose=getKeyPoint("nose");
         Point neck=getKeyPoint("neck");
 

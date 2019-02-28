@@ -1,7 +1,4 @@
 package model;
-
-import java.sql.Timestamp;
-
 /**
  * 坐姿数据
  * @author zeng
@@ -9,7 +6,47 @@ import java.sql.Timestamp;
 public class SittingPosition {
     int id;
     int uid;
-    private int status;//0,1,2,3,4,5,6
-    private double quality;//质量，范围为[0,1]越接近1，越符合该种姿势
-    private Timestamp time;
+    /**
+     * 0 正常
+     * 1 头左偏
+     * 2 头右偏
+     * 3 左手错误放置
+     * 4 右手错误放置
+     * 5 身体倾斜
+     * 6 趴桌
+     */
+    int status;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "SittingPosition{" +
+                "id=" + id +
+                ", uid=" + uid +
+                ", statu=" + status +
+                '}';
+    }
 }

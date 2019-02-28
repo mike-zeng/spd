@@ -7,7 +7,11 @@ import model.SpdImage;
 import model.UpperBodyInfo;
 import service.SittingPositionDetection;
 import service.impl.SimpleSittingPositionDetection;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
+import java.awt.*;
+import java.io.*;
 import java.util.HashMap;
 
 /**
@@ -21,7 +25,7 @@ public class Spd {
    private Spd(){
    }
    //单例模式，谁让baidu Api免费用户不支持并发呢
-   public static Spd getInstance(HashMap<String,String> headDetectorConfig,HashMap<String,String> upperBodyDetectorConfig){
+   public static  Spd getInstance(HashMap<String,String> headDetectorConfig,HashMap<String,String> upperBodyDetectorConfig){
        //获取单例
        headDetector=HeadDetector.getHeadDetecto();
        upperBodyDetector=UpperBodyDetector.getUpperBodyDetector();
@@ -40,18 +44,17 @@ public class Spd {
      * @param base 图片的base64码，大小不超过2MB
      * @return 坐姿信息类
      */
-   private SittingPosition getSittingPosition(Integer uid,String base){
+   public SittingPosition getSittingPosition(Integer uid,String base){
        HeadInfo headInfo=null;
        UpperBodyInfo upperBodyInfo=null;
 
-       SpdImage spdImage1=new SpdImage(base,SpdImage.BASE64);
-       SpdImage spdImage2=new SpdImage(Base64Util.decode(base));
+       SpdImage spdImage=new SpdImage(base);
        //获取基础信息：头部信息，关键点信息
        try {
-           headInfo=headDetector.detection(spdImage1);
-           upperBodyInfo=upperBodyDetector.detection(spdImage2);
+           headInfo=headDetector.detection(spdImage);
+           upperBodyInfo=upperBodyDetector.detection(spdImage);
 
-           if (headInfo==null||upperBodyInfo==null){
+           if (headInfo==null&&upperBodyInfo==null){
                return null;
            }
        }catch (Exception e){
@@ -62,7 +65,7 @@ public class Spd {
 
        SittingPositionDetection sittingPositionDetection=new SimpleSittingPositionDetection();
        sittingPosition=sittingPositionDetection.getSittingPosition(headInfo,upperBodyInfo);
+       sittingPosition.setUid(uid);
        return sittingPosition;
    }
-
 }

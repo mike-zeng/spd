@@ -1,33 +1,29 @@
 package model;
 
 
+import com.baidu.aip.util.Base64Util;
+import sun.misc.BASE64Decoder;
+
 /**
  * 统一图片形式
  */
 public class SpdImage {
-    public final static String URL="url";
-    public final static String BASE64="base64";
-    public final static String BYTE_ARRAY="byteArray";
+    public final static String URL="URL";
+    public final static String BASE64="BASE64";
+
 
     private Integer width;
     private Integer height;
 
     private String image=null;
-    private byte[] imageArr=null;
-    private String type=null;
+    private String type=SpdImage.BASE64;
 
     public SpdImage(){
 
     }
 
-    public SpdImage(byte[] image){
-        this.type=SpdImage.BYTE_ARRAY;
-        imageArr=image;
-    }
-
-    public SpdImage(String image,String type){
+    public SpdImage(String image){
         this.image=image;
-        this.type=type;
     }
 
     public String getImage(){
@@ -39,7 +35,15 @@ public class SpdImage {
     }
 
     public byte[] getImageArr() {
-        return imageArr;
+        BASE64Decoder base64Decoder=new BASE64Decoder();
+        byte[] bytes=null;
+        try {
+            bytes=base64Decoder.decodeBuffer(image);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return bytes;
     }
 
     public Integer getWidth() {

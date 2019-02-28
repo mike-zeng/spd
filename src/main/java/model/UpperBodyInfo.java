@@ -44,4 +44,8 @@ public class UpperBodyInfo {
     //关键点8 右手腕
     private Point rightWrist;
 
+    private double bodyWidth;
+
+    private double bodyHeight;
+
 }
