@@ -4,8 +4,8 @@ package model;
  * @author zeng
  */
 public class SittingPosition {
-    int id;
-    int uid;
+    private int id;
+    private int uid;
     /**
      * 0 正常
      * 1 头左偏
@@ -15,7 +15,8 @@ public class SittingPosition {
      * 5 身体倾斜
      * 6 趴桌
      */
-    int status;
+    private int status;
+    private double degree;
 
     public int getId() {
         return id;
@@ -41,12 +42,21 @@ public class SittingPosition {
         this.status = status;
     }
 
+    public double getDegree() {
+        return degree;
+    }
+
+    public void setDegree(double degree) {
+        this.degree = degree;
+    }
+
     @Override
     public String toString() {
         return "SittingPosition{" +
                 "id=" + id +
                 ", uid=" + uid +
-                ", statu=" + status +
+                ", status=" + status +
+                ", degree=" + degree +
                 '}';
     }
 }

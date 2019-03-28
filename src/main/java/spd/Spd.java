@@ -1,4 +1,5 @@
-import com.baidu.aip.util.Base64Util;
+package spd;
+
 import detector.impl.HeadDetector;
 import detector.impl.UpperBodyDetector;
 import model.HeadInfo;
@@ -7,11 +8,7 @@ import model.SpdImage;
 import model.UpperBodyInfo;
 import service.SittingPositionDetection;
 import service.impl.SimpleSittingPositionDetection;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
-import java.awt.*;
-import java.io.*;
 import java.util.HashMap;
 
 /**
